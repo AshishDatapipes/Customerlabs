@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: stg_ga4_events
+    description: "Staging model for GA4 events from the public ecommerce sample. Cleans and flattens key fields."
+    columns:
+      - name: event_name
+        description: "Name of the GA4 event (e.g., page_view, add_to_cart)"
+        tests:
+          - not_null
+
+      - name: event_timestamp
+        description: "Timestamp of the event in microseconds since epoch"
+        tests:
+          - not_null
+
+      - name: user_pseudo_id
+        description: "Anonymous user identifier used to group events"
+        tests:
+          - not_null
+
+      - name: country
+        description: "Country from geo data"
+      - name: region
+        description: "Region from geo data"
+      - name: traffic_source
+        description: "Traffic source (e.g., google, direct)"
+      - name: traffic_medium
+        description: "Traffic medium (e.g., organic, referral)"
+      - name: device_category
+        description: "Device category (mobile, desktop, tablet)"
+      - name: operating_system
+        description: "Operating system of the device"
+      - name: platform
+        description: "Platform used (e.g., WEB, ANDROID)"
+      - name: event_params
+        description: "Nested event parameters array"
