@@ -6,18 +6,15 @@ models:
     columns:
       - name: event_name
         description: "Name of the GA4 event (e.g., page_view, add_to_cart)"
-        tests:
-          - not_null
+        tests: [not_null]
 
       - name: event_timestamp
         description: "Timestamp of the event in microseconds since epoch"
-        tests:
-          - not_null
+        tests: [not_null]
 
       - name: user_pseudo_id
         description: "Anonymous user identifier used to group events"
-        tests:
-          - not_null
+        tests: [not_null]
 
       - name: country
         description: "Country from geo data"
@@ -35,3 +32,23 @@ models:
         description: "Platform used (e.g., WEB, ANDROID)"
       - name: event_params
         description: "Nested event parameters array"
+
+  - name: mart_attribution_first
+    description: "First-click attribution model based on earliest session timestamp per user."
+    columns:
+      - name: user_pseudo_id
+        description: "Anonymous user identifier used to group sessions"
+        tests: [not_null, unique]
+      - name: first_click_time
+        description: "Timestamp of the user's first session"
+        tests: [not_null]
+
+  - name: mart_attribution_last
+    description: "Last-click attribution model based on latest session timestamp per user."
+    columns:
+      - name: user_pseudo_id
+        description: "Anonymous user identifier used to group sessions"
+        tests: [not_null, unique]
+      - name: last_click_time
+        description: "Timestamp of the user's last session"
+        tests: [not_null]
